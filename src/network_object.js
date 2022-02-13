@@ -9,26 +9,23 @@ Queue = vis.Queue;
 
 
 class Node {
-    /*
-        Node 생성 옵션 자동 완성 받으려고 만들었음
-    */
     constructor(id, label) {
-        if (id == undefined) {
-            throw Error("Node의 id는 명시되어야 함");
-        }
+        if (id == undefined) 
+            throw new Error("id는 명시되어야 함");
         this.id = id;
-        this.label = label ? label : String(id);
+        this.label = label ? label : String(this.id);
     };
 }
 
 class Edge {
-    constructor(from, to, label) {
+    constructor(from, to, label, arrows="to") {
         if (from == undefined || to == undefined) {
             throw Error("Edge의 시작과 끝은 명시되어야 함");
         }
         this.from = from;
         this.to = to;
         this.label = label ? label : String(from) + "->" + String(to);
+        this.arrows = arrows;
     }
 }
 

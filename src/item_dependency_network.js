@@ -1,36 +1,62 @@
-import { Node, Edge, Network, DataSet, DataView, Queue }from './network_object.js';
+import { Node, Edge, Network, DataSet, DataView, Queue } from './network_object.js';
+import { ItemFactory, ICountable, IProducible } from "./data/item.js";
 
-var nodes = [...Array(15).keys()].map((n) => {
-    return new Node(n);
-}).map(
-    // Make the nodes wide, the higher the id the wider, except for every third.
-    (node) => (
-        (node.label =
-            node.id % 3 === 0
-                ? `${node.id}`
-                : `| ${"-".repeat(node.id)} ${node.id} ${"-".repeat(node.id)} |`),
-        node
-    )
-);
 
-var edges = [
-    new Edge(0, 1),
-    { from: 0, to: 2 },
-    { from: 1, to: 3 },
-    { from: 1, to: 4 },
-    { from: 2, to: 5 },
-    { from: 2, to: 6 },
-    { from: 3, to: 7 },
-    { from: 3, to: 8 },
-    { from: 4, to: 9 },
-    { from: 4, to: 10 },
-    { from: 10, to: 10 },
-    { from: 5, to: 11 },
-    { from: 5, to: 12 },
-    { from: 6, to: 13 },
-    { from: 6, to: 14 },
-    { from: 7, to: 15 },
-];
+function printMaterialRecurse(item) {
+    console.log(item.toString());
+    if (item instanceof IProducible) {
+        for (item of item.materialArr) {
+            printMaterialRecurse(item);
+        }
+    }
+}
+
+function getItemTypeId(name) {
+    let idx = Object.keys(ItemFactory).indexOf(name);
+    if (idx === -1)
+        throw new Error("존재하지 않는 아이템");
+    return idx;
+}
+
+function dependencyGraph(items) {
+    let nodes = new Set();
+    let edges = new Array();
+    function recurse(item, nodes, edges) {
+        nodes.add(item.krName);
+        if (item instanceof IProducible) {
+            for (let child of item.materialArr) {
+                edges.push(new Edge(child.krName, item.krName, `${child.krName} ${child.count}개 + ${item.timeNeeded}초 = ${item.krName} ${item.outCount}개`));
+                recurse(child, nodes, edges);
+            }
+        }
+    }
+    for (let item of items)
+        recurse(item, nodes, edges);
+    return [Array.from(nodes).map(x => {return {id: x, label: x}}), edges];
+}
+
+let items = Object.values(ItemFactory).map((cls) => new cls(0));
+
+console.log(items);
+
+console.log("> item 기본 출력");
+console.log(items[0].toString());
+
+try {
+    console.log("> item 전체 출력");
+    console.log(items[0].fullInfo());    
+}
+catch {}
+
+console.log("> item 생산 경로");
+printMaterialRecurse(items[0]);
+
+console.log("> items 생산 그래프");
+let ret = dependencyGraph(items);
+let nodes = ret[0];
+let edges = ret[1];
+
+console.log(nodes, edges);
 
 var network = null;
 
@@ -57,7 +83,7 @@ function draw() {
             },
         },
     };
-    
+
     network = new Network(container, data, options);
 }
 
