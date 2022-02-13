@@ -1,3 +1,13 @@
+
+// 인텔리센스용 눈속임 코드
+var require = x => x;
+var { Network, DataSet, DataView, Queue } = require("vis-network");
+Network = vis.Network;
+DataSet = vis.DataSet;
+DataView = vis.DataView;
+Queue = vis.Queue;
+
+
 class Node {
     /*
         Node 생성 옵션 자동 완성 받으려고 만들었음
@@ -22,4 +32,4 @@ class Edge {
     }
 }
 
-export {Node, Edge}
+export {Node, Edge, Network, DataSet, DataView, Queue}
