@@ -1,0 +1,21 @@
+html,
+body,
+#mynetwork {
+  margin: 0px;
+  padding: 0px;
+}
+
+#mynetwork {
+  position: fixed;
+  left: 0px;
+  top: 40px;
+  bottom: 0px;
+  right: 0px;
+  min-height: 100vh;
+  border-right: 1px solid lightgray;
+  background: white;
+}
+
+#title {
+  margin-bottom: 5em;
+}
