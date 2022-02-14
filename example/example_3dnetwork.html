@@ -5,7 +5,7 @@
         }
     </style>
 
-    <script src="//unpkg.com/3d-force-graph"></script>
+    <script src="//unpkg.com/3d-force-graph" type="module"></script>
     <!--<script src="../../dist/3d-force-graph.js"></script>-->
 </head>
 
@@ -13,6 +13,7 @@
     <div id="3d-graph"></div>
 
     <script>
+
         // Random tree
         const N = 40;
         const gData = {
@@ -24,7 +25,7 @@
                     target: Math.round(Math.random() * (id - 1))
                 }))
         };
-
+        
         const Graph = ForceGraph3D()
             (document.getElementById('3d-graph'))
             .graphData(gData)

@@ -170,6 +170,7 @@ const ProcessedGoods = {
     "MysteriousPretzelStake": MysteriousPretzelStake,
     "BrightBlueCandyTongs": BrightBlueCandyTongs,
     "UnchangingSugarCoatedHammer": UnchangingSugarCoatedHammer,
+    // "JellyBeanJam": JellyBeanJam
 }
 
 const ItemFactory = { 

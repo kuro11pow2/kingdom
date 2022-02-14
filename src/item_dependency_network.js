@@ -1,5 +1,6 @@
-import { Node, Edge, Network, DataSet, DataView, Queue } from './network_object.js';
+import { Node, Edge, Network, DataSet, DataView, Queue } from './vis_network_support.js';
 import { ItemFactory, ICountable, IProducible, IHarvestGoods, IProcessedGoods } from "./data/item.js";
+
 
 var toJsonSet = aset => JSON.stringify([...new Set(aset)].sort()); 
 var fromJsonSet = jset => new Array(...JSON.parse(jset)).map((item) => new Node(item.id, item.label));
@@ -105,12 +106,12 @@ function draw() {
     var container = document.getElementById("mynetwork");
     var data = { nodes, edges };
     var options = {
-        // layout: {
-        //     hierarchical: {
-        //         direction: "UD",
-        //         sortMethod: "directed",
-        //     },
-        // },
+        layout: {
+            hierarchical: {
+                direction: "UD",
+                sortMethod: "directed",
+            },
+        },
         physics: {
             hierarchicalRepulsion: {
                 avoidOverlap: 1.0,
