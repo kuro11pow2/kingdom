@@ -1,6 +1,6 @@
 
 import { ItemFactory, ICountable, IProducible, IHarvestGoods, IProcessedGoods } from "./data/item.js";
-
+// import ForceGraph3D from "3d-force-graph"
 
 window.addEventListener("load", () => {
 
@@ -55,31 +55,19 @@ window.addEventListener("load", () => {
     let nodes = Array.from(ret[0]);
     let links = Array.from(ret[1]);
 
-    
-    let network = {
-        "nodes": [
-            { "id": "Myriel", "group": 1 },
-            { "id": "Napoleon", "group": 2 },
-            { "id": "Baptistine", "group": 3 },
-        ],
-        "links": [
-            { "source": "Myriel", "target": "Napoleon"},
-            { "source": "Myriel", "target": "Baptistine" },
-        ]
-    };
-
     let graph = {
         "nodes": nodes,
         "links": links
     };
 
-    console.log(network);
-    console.log(graph);
-
     const Graph = ForceGraph3D()
         (document.getElementById('3d-graph'))
         .graphData(graph)
         .nodeAutoColorBy('group')
+        .linkAutoColorBy(d => graph.nodes[graph.nodes.map((x)=>x.id).indexOf(d.source)].group)
+        .linkOpacity(0.5)
+        .linkDirectionalArrowLength(3.5)
+        .linkDirectionalArrowRelPos(1)
         .nodeThreeObject(node => {
             const sprite = new SpriteText(node.id);
             sprite.material.depthWrite = false; // make sprite background transparent
@@ -88,7 +76,6 @@ window.addEventListener("load", () => {
             return sprite;
         });
         
-    Graph.d3Force('charge').strength(-120);
 });
 
 
