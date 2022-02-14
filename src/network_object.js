@@ -9,11 +9,12 @@ Queue = vis.Queue;
 
 
 class Node {
-    constructor(id, label) {
+    constructor(id, label, group = 0) {
         if (id == undefined) 
             throw new Error("id는 명시되어야 함");
         this.id = id;
         this.label = label ? label : String(this.id);
+        this.group = group;
     };
 }
 
