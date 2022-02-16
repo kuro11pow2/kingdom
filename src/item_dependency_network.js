@@ -114,7 +114,7 @@ function draw() {
         },
         physics: {
             hierarchicalRepulsion: {
-                avoidOverlap: 0.8,
+                avoidOverlap: 1,
             },
         },
     };

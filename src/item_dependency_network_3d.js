@@ -5,21 +5,13 @@ import { ItemFactory, ICountable, IProducible, IHarvestGoods, IProcessedGoods } 
 window.addEventListener("load", () => {
 
     function getGroup(item) {
-        if (item instanceof ItemFactory.Coin) {
-            return 0;
+        let items = Object.keys(ItemFactory)
+        for (let i = 0; i < items.length; i++) {
+            if (items[i] == item.name) {
+                return i
+            }
         }
-        else if (item instanceof ItemFactory.Crystal) {
-            return 1;
-        }
-        else if (item instanceof IHarvestGoods) {
-            return 2;
-        }
-        else if (item instanceof IProcessedGoods) {
-            return 3;
-        }
-        else {
-            return 4;
-        }
+        return -1;
     }
 
     function dependencyGraph(items) {
@@ -66,7 +58,7 @@ window.addEventListener("load", () => {
         .nodeAutoColorBy('group')
         .linkAutoColorBy(d => graph.nodes[graph.nodes.map((x)=>x.id).indexOf(d.source)].group)
         .linkOpacity(0.5)
-        .linkDirectionalArrowLength(3.5)
+        .linkDirectionalArrowLength(5)
         .linkDirectionalArrowRelPos(1)
         .nodeThreeObject(node => {
             const sprite = new SpriteText(node.id);
