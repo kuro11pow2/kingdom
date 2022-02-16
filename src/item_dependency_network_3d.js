@@ -64,7 +64,7 @@ window.addEventListener("load", () => {
             const sprite = new SpriteText(node.id);
             sprite.material.depthWrite = false; // make sprite background transparent
             sprite.color = node.color;
-            sprite.textHeight = 8;
+            sprite.textHeight = 4;
             return sprite;
         });
         
