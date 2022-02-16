@@ -78,29 +78,32 @@ class SugarCubePiece extends IHarvestGoods {
 
 class BiscuitPowder extends IHarvestGoods {
     constructor(count) {
-        super("BiscuitPowder", "비스킷 가루", count, 10*60, 3, [new Coin(200)])
+        super("BiscuitPowder", "비스킷 가루", count, 10 * 60, 3, [new Coin(200)])
     }
 }
 
 class JellyBerry extends IHarvestGoods {
     constructor(count) {
-        super("JellyBean", "젤리베리", count, 18*60, 2, [new Coin(500)])
+        super("JellyBean", "젤리베리", count, 18 * 60, 2, [new Coin(500)])
     }
 }
 
 class MilkyMilk extends IHarvestGoods {
     constructor(count) {
-        super("MilkyMilk", "밀키 우유", count, 28*60, 2, [new Coin(700)])
+        super("MilkyMilk", "밀키 우유", count, 28 * 60, 2, [new Coin(700)])
     }
 }
 
 class CottonCandyWool extends IHarvestGoods {
     constructor(count) {
-        super("CottonCandyWool", "솜사탕 양털", count, 90*60, 1, [new Coin(1000)])
+        super("CottonCandyWool", "솜사탕 양털", count, 90 * 60, 1, [new Coin(1000)])
     }
 }
 
+
 /////////////  가공품  /////////////
+
+// 뚝딱 대장간
 
 class FirmAxe extends IProducible {
     constructor(count) {
@@ -109,37 +112,37 @@ class FirmAxe extends IProducible {
 }
 class StrongPickaxe extends IProducible {
     constructor(count) {
-        super("StrongPickaxe", "튼튼 곡괭이", count, 3*60, 1, [new RollCakeWood(3), new SugarCubePiece(3)]);
+        super("StrongPickaxe", "튼튼 곡괭이", count, 3 * 60, 1, [new RollCakeWood(3), new SugarCubePiece(3)]);
     }
 }
 class SawingSaw extends IProducible {
     constructor(count) {
-        super("SawingSaw", "슥삭슥삭 톱", count, 7*60, 1, [new RollCakeWood(6), new SugarCubePiece(5)]);
+        super("SawingSaw", "슥삭슥삭 톱", count, 7 * 60, 1, [new RollCakeWood(6), new SugarCubePiece(5)]);
     }
 }
 class ShovelingShovel extends IProducible {
     constructor(count) {
-        super("ShovelingShovel", "푹푹 삽", count, 15*60, 1, [new RollCakeWood(10), new SugarCubePiece(10)]);
+        super("ShovelingShovel", "푹푹 삽", count, 15 * 60, 1, [new RollCakeWood(10), new SugarCubePiece(10)]);
     }
 }
 class MysteriousPretzelStake extends IProducible {
     constructor(count) {
-        super("MysteriousPretzelStake", "신비한 프레첼 말뚝", count, 60*60, 1, [new RollCakeWood(15), new SugarCubePiece(15)]);
+        super("MysteriousPretzelStake", "신비한 프레첼 말뚝", count, 60 * 60, 1, [new RollCakeWood(15), new SugarCubePiece(15)]);
     }
 }
 class BrightBlueCandyTongs extends IProducible {
     constructor(count) {
-        super("BrightBlueCandyTongs", "영롱한 푸른사탕 집게", count, 3*60*60, 1, [new RollCakeWood(22), new SugarCubePiece(18)]);
+        super("BrightBlueCandyTongs", "영롱한 푸른사탕 집게", count, 3 * 60 * 60, 1, [new RollCakeWood(22), new SugarCubePiece(18)]);
     }
 }
 class UnchangingSugarCoatedHammer extends IProducible {
     constructor(count) {
-        super("UnchangingSugarCoatedHammer", "불변의 슈가 코팅 망치", count, 6*60*60, 1, [new RollCakeWood(30), new SugarCubePiece(35)]);
+        super("UnchangingSugarCoatedHammer", "불변의 슈가 코팅 망치", count, 6 * 60 * 60, 1, [new RollCakeWood(30), new SugarCubePiece(35)]);
     }
 }
 
 
-
+// 설탕몽땅 잼가게
 
 class JellyBeanJam extends IProducible {
     constructor(count) {
@@ -148,69 +151,87 @@ class JellyBeanJam extends IProducible {
 }
 class SweetJellyJam extends IProducible {
     constructor(count) {
-        super("SweetJellyJam", "스윗젤리 잼", count, 8*60, 1, [new JellyBean(6)]);
+        super("SweetJellyJam", "스윗젤리 잼", count, 8 * 60, 1, [new JellyBean(6)]);
     }
 }
 class DalgonaJam extends IProducible {
     constructor(count) {
-        super("DalgonaJam", "젤리빈 잼", count, 20*60, 1, [new JellyBean(6), new JellyBerry(1)]);
+        super("DalgonaJam", "젤리빈 잼", count, 20 * 60, 1, [new JellyBean(6), new JellyBerry(1)]);
     }
 }
 class PomegranateJam extends IProducible {
     constructor(count) {
-        super("PomegranateJam", "석류 잼", count, 2*60*60, 1, [new CottonCandyWool(1), new JellyBeanLatte(1)]);
+        super("PomegranateJam", "석류 잼", count, 2 * 60 * 60, 1, [new CottonCandyWool(1), new JellyBeanLatte(1)]);
     }
 }
 class TokTokBerryJam extends IProducible {
     constructor(count) {
-        super("TokTokBerryJam", "톡톡베리 잼", count, 6*60*60, 1, [new JellyBean(20), new CottonCandyWool(3)]);
+        super("TokTokBerryJam", "톡톡베리 잼", count, 6 * 60 * 60, 1, [new JellyBean(20), new CottonCandyWool(3)]);
     }
 }
 
 
 
+// 롤케이크 공작소
 
 class PineConeBirdDoll extends IProducible {
     constructor(count) {
-        super("PineConeBirdDoll", "솔방울새 인형", count, 5*60, 1, [new RollCakeWood(6)]);
+        super("PineConeBirdDoll", "솔방울새 인형", count, 5 * 60, 1, [new RollCakeWood(6)]);
     }
 }
 class AcornLamp extends IProducible {
     constructor(count) {
-        super("AcornLamp", "도토리 램프", count, 22*60, 1, [new RollCakeWood(12), new JellyBerry(3)]);
+        super("AcornLamp", "도토리 램프", count, 22 * 60, 1, [new RollCakeWood(12), new JellyBerry(3)]);
     }
 }
 class CuckooCuckooClock extends IProducible {
     constructor(count) {
-        super("CuckooCuckooClock", "뻐꾹뻐꾹 시계", count, 2*60*60, 1, [new BiscuitPowder(8), new DalgonaJam(3)]);
+        super("CuckooCuckooClock", "뻐꾹뻐꾹 시계", count, 2 * 60 * 60, 1, [new BiscuitPowder(8), new DalgonaJam(3)]);
     }
 }
 class SwanFeatherDreamcatcher extends IProducible {
     constructor(count) {
-        super("SwanFeatherDreamcatcher", "백조깃털 드림캐처", count, 3.5*60*60, 1, [new RollCakeWood(6)]);
+        super("SwanFeatherDreamcatcher", "백조깃털 드림캐처", count, 3.5*60*60, 1, [new CottonCandyWool(6)]);
     }
 }
 
 
+// 갓 구운 빵집
 
+// 잼파이 레스토랑
+
+// 토닥토닥 도예공방
+
+// 행복한 꽃가게
+
+// 밀키 우유 가공소
+
+// 카페 라떼
 
 class JellyBeanLatte extends IProducible {
     constructor(count) {
-        super("JellyBeanLatte", "젤리빈 라떼", count, 60*60, 1, [new JellyBean(12), new MilkyMilk(2)]);
+        super("JellyBeanLatte", "젤리빈 라떼", count, 60 * 60, 1, [new JellyBean(12), new MilkyMilk(2)]);
     }
 }
 
+// 러블리 인형공방
+
+// 오크통 쉽터
+
+// 퐁 드 파티세리
+
+// 살롱 드 쥬얼리
 
 
 /////////////  분류  /////////////
 
 const Currency = {
-    "Coin": Coin, 
-    "Crystal": Crystal, 
+    "Coin": Coin,
+    "Crystal": Crystal,
 }
 
 const HarvestGoods = {
-    "RollCakeWood": RollCakeWood ,
+    "RollCakeWood": RollCakeWood,
     "JellyBean": JellyBean,
     "SugarCubePiece": SugarCubePiece,
     "BiscuitPowder": BiscuitPowder,
@@ -220,6 +241,7 @@ const HarvestGoods = {
 }
 
 const ProcessedGoods = {
+    // 뚝딱 대장간
     "FirmAxe": FirmAxe,
     "StrongPickaxe": StrongPickaxe,
     "SawingSaw": SawingSaw,
@@ -228,21 +250,81 @@ const ProcessedGoods = {
     "BrightBlueCandyTongs": BrightBlueCandyTongs,
     "UnchangingSugarCoatedHammer": UnchangingSugarCoatedHammer,
 
+    // 설탕몽땅 잼가게
     "JellyBeanJam": JellyBeanJam,
     "SweetJellyJam": SweetJellyJam,
     "DalgonaJam": DalgonaJam,
     "PomegranateJam": PomegranateJam,
     "TokTokBerryJam": TokTokBerryJam,
 
+    // 롤케이크 공작소
     "PineConeBirdDoll": PineConeBirdDoll,
     "AcornLamp": AcornLamp,
     "CuckooCuckooClock": CuckooCuckooClock,
     "SwanFeatherDreamcatcher": SwanFeatherDreamcatcher,
 
+    // 갓 구운 빵집
+    // "ReliableRyeBread": ReliableRyeBread,
+    // "SweetAndChewyJamPie": SweetAndChewyJamPie,
+    // "GinkgoPocachia": GinkgoPocachia,
+    // "SugarCoatedDonut": SugarCoatedDonut,
+    // "SoftCastella": SoftCastella,
+    // "GoldrichCroissant": GoldrichCroissant,
+
+    // 잼파이 레스토랑
+    // "HotJellyStew": HotJellyStew,
+    // "GummyBearBurger": GummyBearBurger,
+    // "CandyCreamPasta": CandyCreamPasta,
+    // "SoftOmurice": SoftOmurice,
+    // "CombinationPizzaJelly": CombinationPizzaJelly,
+    // "LuxuriousJellyBeanSetMenu": LuxuriousJellyBeanSetMenu,
+
+    // 토닥토닥 도예공방
+    // "BiscuitPlantPot": BiscuitPlantPot,
+    // "SparklingGlassPlate": SparklingGlassPlate,
+    // "GlitteringSaekdongBeads": GlitteringSaekdongBeads,
+    // "RainbowDessertBowl": RainbowDessertBowl,
+
+    // 행복한 꽃가게
+    // "CandyFlower": CandyFlower,
+    // "HappyFlowerPot": HappyFlowerPot,
+    // "CandyFlowerBouquet": CandyFlowerBouquet,
+    // "LollipopFlowerBasket": LollipopFlowerBasket,
+    // "GlassFlowerBouquet": GlassFlowerBouquet,
+    // "BrilliantYogurtWreath": BrilliantYogurtWreath,
+
+    // 밀키 우유 가공소
+    // "Cream": Cream,
+    // "Butter": Butter,
+    // "HandmadeCheese": HandmadeCheese,
+
+    // 카페 라떼
     "JellyBeanLatte": JellyBeanLatte,
+    // "SoftAndFuzzyBubbleTea": SoftAndFuzzyBubbleTea,
+    // "SweetBerryAde": SweetBerryAde,
+
+    // 러블리 인형공방
+    // "CloudCandyCushion": CloudCandyCushion,
+    // "GummyBearCottonDoll": GummyBearCottonDoll,
+    // "DragonFruitCottonDoll": DragonFruitCottonDoll,
+
+    // 오크통 쉽터
+    // "CreamRootBeer": CreamRootBeer,
+    // "RedBerryJuice": RedBerryJuice,
+    // "VintageWildBottle": VintageWildBottle,
+
+    // 퐁 드 파티세리
+    // "SpookyMuffin": SpookyMuffin,
+    // "FreshStrawberryCake": FreshStrawberryCake,
+    // "PartyPartyChiffonCake": PartyPartyChiffonCake,
+
+    // 살롱 드 쥬얼리
+    // "GlazedRing": GlazedRing,
+    // "RubyBerryBrooch": RubyBerryBrooch,
+    // "RoyalGummyBearCrown": RoyalGummyBearCrown,
 }
 
-const ItemFactory = { 
+const ItemFactory = {
     ...Currency,
     ...HarvestGoods,
     ...ProcessedGoods,
