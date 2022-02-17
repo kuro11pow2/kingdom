@@ -1,17 +1,11 @@
 
-import { ItemFactory, ICountable, IProducible, IHarvestGoods, IProcessedGoods } from "./data/item.js";
+import { ItemFactory, ItemTree, ItemOrder, ICountable, IProducible, IHarvestGoods, IProcessedGoods } from "./data/item.js";
 // import ForceGraph3D from "3d-force-graph"
 
 window.addEventListener("load", () => {
 
     function getGroup(item) {
-        let items = Object.keys(ItemFactory)
-        for (let i = 0; i < items.length; i++) {
-            if (items[i] == item.name) {
-                return i
-            }
-        }
-        return -1;
+        return ItemOrder.get(item.name);
     }
 
     function dependencyGraph(items) {

@@ -1,5 +1,5 @@
 import { Node, Edge, Network, DataSet, DataView, Queue } from './vis_network_support.js';
-import { ItemFactory, ICountable, IProducible, IHarvestGoods, IProcessedGoods } from "./data/item.js";
+import { ItemFactory, ItemTree, ItemOrder, ICountable, IProducible, IHarvestGoods, IProcessedGoods } from "./data/item.js";
 
 
 var toJsonSet = aset => JSON.stringify([...new Set(aset)].sort()); 
@@ -24,21 +24,7 @@ function getItemTypeId(name) {
 }
 
 function getGroup(item) {
-    if (item instanceof ItemFactory.Coin) {
-        return 0;
-    }
-    else if (item instanceof ItemFactory.Crystal) {
-        return 1;
-    }
-    else if (item instanceof IHarvestGoods) {
-        return 2;
-    }
-    else if (item instanceof IProcessedGoods) {
-        return 3;
-    }
-    else {
-        return 4;
-    }
+    return ItemOrder.get(item.name);
 }
 
 function dependencyGraph(items) {
