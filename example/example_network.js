@@ -1,4 +1,4 @@
-import { Node, Edge } from '../src/network_object.js';
+import { Node, Edge } from '../src/vis_network_support.js';
 
 
 var nodes = [...Array(15).keys()].map((n) => {
