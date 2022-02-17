@@ -386,7 +386,7 @@ class RedBerryJuice extends IProducible {
 }
 class VintageWildBottle extends IProducible {
     constructor(count) {
-        super("VintageWildBottle", "빈티지 와일드 보틀", count, 8 * 60 * 60, 1, new Array(new RollCakeWood(10), new HappyFlowerPot(1)));
+        super("VintageWildBottle", "빈티지 와일드 보틀", count, 8 * 60 * 60, 1, new Array(new RollCakeWood(50), new SpookyMuffin(2)));
     }
 }
 
