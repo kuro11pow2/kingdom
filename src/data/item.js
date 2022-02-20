@@ -14,31 +14,30 @@ class ICountable {
 /**
  * @param name 아이템 이름
  * @param count 보유 개수
- * @param timeNeeded 생산 소요 시간
+ * @param timeRequired 생산 소요 시간
  * @param outCount 1회 생산량
- * @param materialArr 재료
+ * @param materials 재료
  */
 class IProducible extends ICountable {
-    constructor(name, krName, count, timeNeeded, outCount, materialArr) {
+    constructor(name, krName, count, timeRequired, outCount, materials) {
         super(name, krName, count);
-        this.timeNeeded = timeNeeded;
+        this.timeRequired = timeRequired;
         this.outCount = outCount;
-        this.materialArr = materialArr;
-
+        this.materials = materials;
     }
     fullInfo() {
-        return super.toString() + " (" + this.timeNeeded + "초 " + this.outCount + "개 [재료: " + this.materialArr + "])";
+        return super.toString() + " (" + this.timeRequired + "초 " + this.outCount + "개 [재료: " + this.materials + "])";
     }
 }
 
 class IHarvestGoods extends IProducible {
-    constructor(name, krName, count, timeNeeded, outCount, materialArr) {
-        super(name, krName, count, timeNeeded, outCount, materialArr);
+    constructor(name, krName, count, timeRequired, outCount, materials) {
+        super(name, krName, count, timeRequired, outCount, materials);
     }
 }
 class IProcessedGoods extends IProducible {
-    constructor(name, krName, count, timeNeeded, outCount, materialArr) {
-        super(name, krName, count, timeNeeded, outCount, materialArr);
+    constructor(name, krName, count, timeRequired, outCount, materials) {
+        super(name, krName, count, timeRequired, outCount, materials);
     }
 }
 
@@ -531,22 +530,14 @@ const ItemFactory = {
     ...ProcessedGoods,
 };
 
-Set.prototype.union = function (setB) {
-    var union = new Set(this);
-    for (var elem of setB) {
-        union.add(elem);
-    }
-    return union;
-}
-
-function MakeTree() {
+(function SetProducibles() {
     let tree = new Map();
     let items = Object.values(ItemFactory).map((cls) => new cls(0));
     for (let item of items.values()) {
         if (item instanceof IProducible == false) {
             continue;
         }
-        for (let material of item.materialArr) {
+        for (let material of item.materials) {
 
             if (!tree.has(material.name)) {
                 tree.set(material.name, new Set());
@@ -555,12 +546,12 @@ function MakeTree() {
             tree.set(material.name, tree.get(material.name).add(item.name));
         }
     }
+    tree.forEach((v, k, m) => {
+        ItemFactory[k].prototype.producibles = v;
+    })
+})();
 
-    return tree;
-}
-const ItemTree = MakeTree()
-
-function MakeOrder() {
+(function SetOrder() {
     let order = new Map();
     
     function dfs(node, depth) {
@@ -568,16 +559,19 @@ function MakeOrder() {
             depth = Math.max(depth, order.get(node));
         }
         order.set(node, depth);
-        if (ItemTree.get(node) == undefined) {
+        if (ItemFactory[node].prototype.producibles == undefined) {
             return;
         }
-        for (let child of ItemTree.get(node)) {
+        for (let child of ItemFactory[node].prototype.producibles) {
             dfs(child, depth+1);
         }
     }
     dfs("Coin", 0);
-    return order;
-}
-const ItemOrder = MakeOrder();
+    dfs("Crystal", 0);
 
-export { ItemFactory, ItemTree, ItemOrder, ICountable, IProducible, IHarvestGoods, IProcessedGoods };
+    order.forEach((v, k, m) => {
+        ItemFactory[k].prototype.order = v;
+    })
+})();
+
+export { ItemFactory, ICountable, IProducible, IHarvestGoods, IProcessedGoods };

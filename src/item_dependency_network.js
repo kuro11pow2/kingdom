@@ -1,5 +1,5 @@
 import { Node, Edge, Network, DataSet, DataView, Queue } from './vis_network_support.js';
-import { ItemFactory, ItemTree, ItemOrder, ICountable, IProducible, IHarvestGoods, IProcessedGoods } from "./data/item.js";
+import { ItemFactory, ICountable, IProducible, IHarvestGoods, IProcessedGoods } from "./data/item.js";
 
 
 var toJsonSet = aset => JSON.stringify([...new Set(aset)].sort()); 
@@ -10,21 +10,10 @@ console.log(fromJsonSet(toJsonSet([new Node(0), new Node(1)])));
 function printMaterialRecurse(item) {
     console.log(item.toString());
     if (item instanceof IProducible) {
-        for (item of item.materialArr) {
+        for (item of item.materials) {
             printMaterialRecurse(item);
         }
     }
-}
-
-function getItemTypeId(name) {
-    let idx = Object.keys(ItemFactory).indexOf(name);
-    if (idx === -1)
-        throw new Error("존재하지 않는 아이템");
-    return idx;
-}
-
-function getGroup(item) {
-    return ItemOrder.get(item.name);
 }
 
 function dependencyGraph(items) {
@@ -34,10 +23,10 @@ function dependencyGraph(items) {
     let nodes = new Set();
     let edges = new Set();
     function recurse(item, nodes, edges) {
-        let node = {id: item.krName, label: item.krName, group: getGroup(item)}
+        let node = {id: item.krName, label: item.krName, group: item.order}
         nodes.add(Obj2Id(node));
         if (item instanceof IProducible) {
-            for (let child of item.materialArr) {
+            for (let child of item.materials) {
                 // let label = `${child.krName} ${child.count}개 + ${item.timeNeeded}초 = ${item.krName} ${item.outCount}개`
                 let label = ' '
 

@@ -1,12 +1,8 @@
 
-import { ItemFactory, ItemTree, ItemOrder, ICountable, IProducible, IHarvestGoods, IProcessedGoods } from "./data/item.js";
+import { ItemFactory, ICountable, IProducible, IHarvestGoods, IProcessedGoods } from "./data/item.js";
 // import ForceGraph3D from "3d-force-graph"
 
 window.addEventListener("load", () => {
-
-    function getGroup(item) {
-        return ItemOrder.get(item.name);
-    }
 
     function dependencyGraph(items) {
         let Obj2Id = JSON.stringify;
@@ -15,10 +11,10 @@ window.addEventListener("load", () => {
         let nodes = new Set();
         let links = new Set();
         function recurse(item, nodes, links) {
-            let node = {id: item.krName, group: getGroup(item)}
+            let node = {id: item.krName, group: item.order}
             nodes.add(Obj2Id(node));
             if (item instanceof IProducible) {
-                for (let child of item.materialArr) {
+                for (let child of item.materials) {
                     // let label = `${child.krName} ${child.count}개 + ${item.timeNeeded}초 = ${item.krName} ${item.outCount}개`
     
                     let edge = { source: child.krName, target: item.krName};
