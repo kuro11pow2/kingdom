@@ -574,4 +574,61 @@ const ItemFactory = {
     })
 })();
 
+
+
+(function SetTotalTimeAndCoin() {
+    let totalTimePerRequired = new Map();
+    let totalCoinPerRequired = new Map();
+
+    let items = Object.values(ItemFactory).map((cls) => new cls(0));
+
+    function GetTotalTime(item) {
+        if (item instanceof IProducible == false) {
+            if (totalTimePerRequired.has(item.name) === false) {
+                totalTimePerRequired.set(item.name, 0);
+            }
+        }
+        if (totalTimePerRequired.has(item.name)) {
+            return item.count * totalTimePerRequired.get(item.name);
+        }
+        let totalTime = item.timeRequired;
+        for (let material of item.materials) {
+            totalTime += GetTotalTime(material);
+        }
+        totalTime /= item.outCount
+        totalTimePerRequired.set(item.name, totalTime);
+        return totalTime;
+    }
+
+    function GetTotalCoin(item) {
+        if (item instanceof IProducible == false) {
+            if (totalCoinPerRequired.has(item.name) === false) {
+                totalCoinPerRequired.set(item.name, 1);
+            }
+        }
+        if (totalCoinPerRequired.has(item.name)) {
+            return item.count * totalCoinPerRequired.get(item.name);
+        }
+        let totalCoin = 0;
+        for (let material of item.materials) {
+            totalCoin += GetTotalCoin(material);
+        }
+        totalCoin /= item.outCount
+        totalCoinPerRequired.set(item.name, totalCoin);
+        return totalCoin;
+    }
+
+    for (let item of items.values()) {
+        GetTotalTime(item);
+        GetTotalCoin(item);
+    }
+    totalTimePerRequired.forEach((v, k, m) => {
+        ItemFactory[k].prototype.totalTimePerRequired = v;
+    })
+    totalCoinPerRequired.forEach((v, k, m) => {
+        ItemFactory[k].prototype.totalCoinPerRequired = v;
+    })
+})();
+
+
 export { ItemFactory, ICountable, IProducible, IHarvestGoods, IProcessedGoods };
