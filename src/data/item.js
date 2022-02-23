@@ -21,10 +21,10 @@ class ICountable {
 class IProducible extends ICountable {
     constructor(name, krName, count, deliveryScore, timeRequired, outCount, materials) {
         super(name, krName, count);
+        this.deliveryScore = deliveryScore;
         this.timeRequired = timeRequired;
         this.outCount = outCount;
         this.materials = materials;
-        this.deliveryScore = deliveryScore;
     }
     fullInfo() {
         return super.toString() + " (" + this.timeRequired + "초 " + this.outCount + "개 [재료: " + this.materials + "])";
@@ -549,6 +549,35 @@ const ItemFactory = {
     }
     tree.forEach((v, k, m) => {
         ItemFactory[k].prototype.producibles = v;
+    })
+})();
+
+// 이 아이템이 재료로 들어가는 모든 아이템을 각각 1회 생산할 때 드는 총 개수
+(function SetmaximumDemandPerHour() {
+    let demand = new Map();
+    for (let itemClass of Object.values(ItemFactory)) {
+        let item = new itemClass(0);
+        
+        if ((item instanceof IProducible) === false) {
+            continue;
+        }
+
+        for (let material of item.materials) {
+            /*
+            시간당 소모량 = 재료개수*3600/생산시간(초)
+            */
+            let count = material.count*3600/item.timeRequired;
+            if (demand.has(material.name)) {
+                count += demand.get(material.name);
+            }
+            demand.set(material.name, count);
+        }
+    }
+
+    Object.values(ItemFactory).map((cls) => cls.prototype.maximumDemandPerHour = 0);
+
+    demand.forEach((v, k, m) => {
+        ItemFactory[k].prototype.maximumDemandPerHour = v;
     })
 })();
 
