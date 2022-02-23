@@ -21,8 +21,9 @@ window.addEventListener("load", () => {
         "소요 시간 총합 (초/개당)", 
         "소요 코인 총합 (코인/개당)", 
         "납품 점수 (점/개당)", 
-        "직접 요구 재료 (개당)",
-        "최대 소모량 (시간당)"]));
+        "최대 생산량 (시간당)",
+        "최대 소모량 (시간당)",
+        "직접 요구 재료 (개당)",]));
     for (let item of Object.values(ItemFactory)) {
         if (item === ItemFactory.Crystal || item == ItemFactory.Coin) {
             continue;
@@ -35,8 +36,9 @@ window.addEventListener("load", () => {
             Math.round(inst.totalTimePerRequired*100)/100, 
             Math.round(inst.totalCoinPerRequired*100)/100, 
             inst.deliveryScore, 
-            mateiralsStr,
-            inst.maximumDemandPerHour,);
+            Math.round(inst.outCount*3600/inst.timeRequired*100)/100,
+            Math.round(inst.maximumDemandPerHour*100)/100,
+            mateiralsStr,);
         tableBody.appendChild(CreateRow("td", str))
     }
     

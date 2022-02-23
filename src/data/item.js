@@ -604,8 +604,9 @@ const ItemFactory = {
     })
 })();
 
-
-
+// 소요 시간 총합 = 재료 아이템들의 소요 시간 총합 + 아이템 생산 시간
+// 당연히 아이템은 한번에 여러 건물에서 동시에 병렬적으로 생산되므로 소요 시간 총합만큼 기다리지 않음
+// 시간을 가치로 생각하고 그 총합을 계산한 것
 (function SetTotalTimeAndCoin() {
     let totalTimePerRequired = new Map();
     let totalCoinPerRequired = new Map();
