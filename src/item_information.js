@@ -29,16 +29,16 @@ window.addEventListener("load", () => {
             continue;
         }
         let Round = (pos, num) => Math.round(num * Math.pow(10, pos)) / Math.pow(10, pos);
-        let inst = new item(0);
-        let mateiralsStr = inst.materials.map((material) => `${material.krName} ${Round(2, material.count / inst.outCount)}개`);
+        let item = new item(0);
+        let mateiralsStr = item.materials.map((material) => `${material.krName} ${Round(2, material.count / item.outCount)}개`);
         let str = new Array(
-            inst.krName,
-            inst.order,
-            Round(2, inst.outCount * 3600 / inst.timeRequired),
-            Round(2, inst.maximumDemandPerHour),
-            Round(2, inst.totalTimePerRequired),
-            Round(2, inst.totalCoinPerRequired),
-            inst.deliveryScore,
+            item.krName,
+            item.order,
+            Round(2, item.maximumProductionPerHour),
+            Round(2, item.maximumDemandPerHour),
+            Round(2, item.totalTimePerRequired),
+            Round(2, item.totalCoinPerRequired),
+            item.deliveryScore,
             mateiralsStr);
         tableBody.appendChild(CreateRow("td", str))
     }

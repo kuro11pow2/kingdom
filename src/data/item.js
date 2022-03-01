@@ -581,6 +581,26 @@ const ItemFactory = {
     })
 })();
 
+// 
+(function SetmaximumProductionPerHour() {
+    let production = new Map();
+    for (let itemClass of Object.values(ItemFactory)) {
+        let item = new itemClass(0);
+        
+        if ((item instanceof IProducible) === false) {
+            continue;
+        }
+        production.set(item.name, item.outCount * 3600 / item.timeRequired);
+    }
+
+    Object.values(ItemFactory).map((cls) => cls.prototype.maximumProductionPerHour = 0);
+
+    demand.forEach((v, k, m) => {
+        ItemFactory[k].prototype.maximumProductionPerHour = v;
+    })
+})();
+
+// 아이템 생산 단계 계산
 (function SetOrder() {
     let order = new Map();
     
@@ -605,8 +625,6 @@ const ItemFactory = {
 })();
 
 // 소요 시간 총합 = 재료 아이템들의 소요 시간 총합 + 아이템 생산 시간
-// 당연히 아이템은 한번에 여러 건물에서 동시에 병렬적으로 생산되므로 소요 시간 총합만큼 기다리지 않음
-// 시간을 가치로 생각하고 그 총합을 계산한 것
 (function SetTotalTimeAndCoin() {
     let totalTimePerRequired = new Map();
     let totalCoinPerRequired = new Map();
