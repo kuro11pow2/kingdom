@@ -1,4 +1,4 @@
-import { ItemFactory, ICountable, ICurrency, IProducible, IHarvestGoods, ITools, IProcessedGoods } from "./data/item.js";
+import { ItemFactory, ICountable, ICurrency, IProducible, IProducibleSet, IHarvestGoods, ITools, IProcessedGoods, ICashPackage } from "./data/item_calc.js";
 
 
 window.addEventListener("load", () => {
@@ -28,7 +28,7 @@ window.addEventListener("load", () => {
     for (let itemCls of Object.values(ItemFactory)) {
         let item = new itemCls(0);
 
-        if (item instanceof ICurrency || item instanceof ITools) {
+        if (item instanceof ICurrency || item instanceof ITools || item instanceof IProducibleSet) {
             continue;
         }
         let Round = (pos, num) => Math.round(num * Math.pow(10, pos)) / Math.pow(10, pos);

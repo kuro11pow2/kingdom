@@ -1,5 +1,5 @@
 
-import { ItemFactory, ICountable, IProducible, IHarvestGoods, IProcessedGoods } from "./data/item.js";
+import { ItemFactory, ICountable, IProducible, IHarvestGoods, IProcessedGoods } from "./data/item_calc.js";
 // import ForceGraph3D from "3d-force-graph"
 
 window.addEventListener("load", () => {

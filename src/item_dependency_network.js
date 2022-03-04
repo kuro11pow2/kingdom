@@ -1,5 +1,5 @@
 import { Node, Edge, Network, DataSet, DataView, Queue } from './vis_network_support.js';
-import { ItemFactory, ICountable, IProducible, IHarvestGoods, IProcessedGoods } from "./data/item.js";
+import { ItemFactory, ICountable, IProducible, IHarvestGoods, IProcessedGoods } from "./data/item_calc.js";
 
 
 var toJsonSet = aset => JSON.stringify([...new Set(aset)].sort()); 
