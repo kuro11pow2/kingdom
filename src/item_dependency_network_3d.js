@@ -1,5 +1,5 @@
 
-import { ItemFactory, ICountable, IProducible, IHarvestGoods, IProcessedGoods } from "./data/item_calc.js";
+import { ItemFactory, ICountable, ICurrency, IProducible, IProducibleSet, IHarvestGoods, ITools, IProcessedGoods, ICashPackage } from "./data/item_calc.js";
 // import ForceGraph3D from "3d-force-graph"
 
 window.addEventListener("load", () => {
@@ -22,6 +22,18 @@ window.addEventListener("load", () => {
                     recurse(child, nodes, links);
                 }
             }
+            else if (item instanceof IProducibleSet) {
+                for (let child of item.inputs) {
+                    let edge = { source: child.krName, target: item.krName };
+                    links.add(Obj2Id(edge));
+                    
+                    for (let parent of item.outputs) {
+                        let edge = { source: item.krName, target: parent.krName };
+                        links.add(Obj2Id(edge));
+                    }
+                    recurse(child, nodes, links);
+                }
+            }
         }
         
         for (let item of items)
@@ -29,6 +41,7 @@ window.addEventListener("load", () => {
     
         nodes = Array.from(nodes).map(x => {return Id2Object(x)});
         links = Array.from(links).map(x => {return Id2Object(x)});
+        console.log(nodes);
         return [nodes, links];
     }
 
@@ -46,7 +59,13 @@ window.addEventListener("load", () => {
         (document.getElementById('3d-graph'))
         .graphData(graph)
         .nodeAutoColorBy('group')
-        .linkAutoColorBy(d => graph.nodes[graph.nodes.map((x)=>x.id).indexOf(d.source)].group)
+        .linkAutoColorBy(d => { 
+            let key = graph.nodes
+                        .map(x=>x.id)
+                        .indexOf(d.source);
+            console.log(d, key, graph.nodes[key])
+            graph.nodes[key].group
+        })
         .linkOpacity(0.5)
         .linkDirectionalArrowLength(5)
         .linkDirectionalArrowRelPos(1)
