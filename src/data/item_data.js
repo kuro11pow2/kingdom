@@ -22,6 +22,12 @@ class Crystal extends ICurrency {
     }
 }
 
+class RainbowCube extends ICurrency {
+    constructor(count) {
+        super("RainbowCube", "무지개 큐브", count);
+    }
+}
+
 
 /////////////  수확물  /////////////
 
@@ -395,9 +401,21 @@ class RoyalGummyBearCrown extends IProcessedGoods {
 
 // 캐시 상품
 
-class CrystalMonthlyFee extends ICashPackage {
+class CrystalMonthlyFeeSubstance extends ICashPackage {
     constructor(count) {
-        super("CrystalMonthlyFee", "크리스탈 월정액", count, [new Crystal(5900)], [new Won(5900)])
+        super("CrystalMonthlyFeeSubstance", "크리스탈 월정액 실속", count, [new Crystal(3200)], [new Won(5900)])
+    }
+}
+
+class CrystalMonthlyFeePremium extends ICashPackage {
+    constructor(count) {
+        super("CrystalMonthlyFeePremium", "크리스탈 월정액 프리미엄", count, [new Crystal(10200)], [new Won(19000)])
+    }
+}
+
+class SupportingKindomEveryday extends ICashPackage {
+    constructor(count) {
+        super("SupportingKindomEveryday", "매일 매일 왕국 지원", count, [new Crystal(300), new RainbowCube(300)], [new Won(1200)])
     }
 }
 
@@ -408,6 +426,7 @@ const Currency = {
     "Coin": Coin,
     "Crystal": Crystal,
     "Won": Won,
+    "RainbowCube": RainbowCube,
 }
 
 const Tools = {
@@ -507,7 +526,9 @@ const ProcessedGoods = {
 }
 
 const CashPackage = {
-    "CrystalMonthlyFee": CrystalMonthlyFee,
+    "CrystalMonthlyFeeSubstance": CrystalMonthlyFeeSubstance,
+    "CrystalMonthlyFeePremium": CrystalMonthlyFeePremium,
+    "SupportingKindomEveryday": SupportingKindomEveryday,
 }
 
 
