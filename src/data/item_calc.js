@@ -106,7 +106,6 @@ import { ItemFactory, ICountable, ICurrency, IProducible, IProducibleSet, IHarve
         }
     }
     dfs("Coin", 0);
-    console.log(order);
     dfs("Won", 0);
 
     order.forEach((v, k, m) => {

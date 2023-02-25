@@ -41,7 +41,6 @@ window.addEventListener("load", () => {
     
         nodes = Array.from(nodes).map(x => {return Id2Object(x)});
         links = Array.from(links).map(x => {return Id2Object(x)});
-        console.log(nodes);
         return [nodes, links];
     }
 
@@ -63,7 +62,6 @@ window.addEventListener("load", () => {
             let key = graph.nodes
                         .map(x=>x.id)
                         .indexOf(d.source);
-            console.log(d, key, graph.nodes[key])
             graph.nodes[key].group
         })
         .linkOpacity(0.5)

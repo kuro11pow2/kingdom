@@ -18,13 +18,14 @@ window.addEventListener("load", () => {
     tableHead.appendChild(CreateRow("th", [
         "이름",
         "생산 단계",
-        "최대 생산량 (시간당)",
-        "최대 소모량 (시간당)",
-        "소요 시간 총합 (초/개당)",
-        "소요 코인 총합 (코인/개당)",
+        "최대 생산량 (개/시간)",
+        "최대 소모량 (개/시간)",
+        "소요 시간 총합 (초)",
+        "소요 코인 총합 (코인)",
         "공급률",
-        "납품 점수 (점/개당)",
-        "직접 요구 재료 (개당)",]));
+        "납품 점수 (점)",
+        "납품 점수 당 소요 시간 (초)",
+        "직접 요구 재료",]));
     for (let itemCls of Object.values(ItemFactory)) {
         let item = new itemCls(0);
 
@@ -42,6 +43,7 @@ window.addEventListener("load", () => {
             Round(2, item.totalCoinPerRequired),
             Round(2, item.maximumProductionPerHour / item.maximumDemandPerHour),
             item.deliveryScore,
+            Round(2, item.totalTimePerRequired / item.deliveryScore),
             mateiralsStr);
         tableBody.appendChild(CreateRow("td", str))
     }
